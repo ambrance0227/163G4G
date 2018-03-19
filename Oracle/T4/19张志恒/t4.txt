@@ -1,0 +1,289 @@
+SQL> select floor(2.33) from dual;
+
+FLOOR(2.33)                                                                     
+-----------                                                                     
+          2                                                                     
+
+SQL> select ads(-563) from dual;
+select ads(-563) from dual
+       *
+第 1 行出现错误: 
+ORA-00904: "ADS": 标识符无效 
+
+
+SQL> select abs(-563) from dual;
+
+ ABS(-563)                                                                      
+----------                                                                      
+       563                                                                      
+
+SQL> select power(5,5) from dual;
+
+POWER(5,5)                                                                      
+----------                                                                      
+      3125                                                                      
+
+SQL> select mod(445,12) from dual;
+
+MOD(445,12)                                                                     
+-----------                                                                     
+          1                                                                     
+
+SQL> select cos(45) from dual;
+
+   COS(45)                                                                      
+----------                                                                      
+.525321989                                                                      
+
+SQL> select round(132.132,1) from dual;
+
+ROUND(132.132,1)                                                                
+----------------                                                                
+           132.1                                                                
+
+SQL> select sprt(52) from dual;
+select sprt(52) from dual
+       *
+第 1 行出现错误: 
+ORA-00904: "SPRT": 标识符无效 
+
+
+SQL> select sqrt(52) from dual;
+
+  SQRT(52)                                                                      
+----------                                                                      
+7.21110255                                                                      
+
+SQL> select sign(+) from dual;
+select sign(+) from dual
+           *
+第 1 行出现错误: 
+ORA-30563: 选择列表中不允许使用外部连接运算符 (+) 
+
+
+SQL> select sign(-4) from dual;
+
+  SIGN(-4)                                                                      
+----------                                                                      
+        -1                                                                      
+
+SQL> select concat('hello','你好') from dual;
+
+CONCAT('HELLO','你好')                                                          
+----------------------                                                          
+hello你好                                                                       
+
+SQL> select substr('asdfghjkl',4,3) from dual;
+
+SUBSTR                                                                          
+------                                                                          
+fgh                                                                             
+
+SQL> select ltrim('   hahaha    ') from dual;
+
+LTRIM('HAHAHA')                                                                 
+--------------------                                                            
+hahaha                                                                          
+
+SQL> select rtrim('   hahaha    ') from dual;
+
+RTRIM('HAHAHA')                                                                 
+------------------                                                              
+   hahaha                                                                       
+
+SQL> select length('   hahaha    ') from dual;
+
+LENGTH('HAHAHA')                                                                
+----------------                                                                
+              13                                                                
+
+SQL> select uppoer('   hahaha    ') from dual;
+select uppoer('   hahaha    ') from dual
+       *
+第 1 行出现错误: 
+ORA-00904: "UPPOER": 标识符无效 
+
+
+SQL> select upper('   hahaha    ') from dual;
+
+UPPER('HAHAHA')                                                                 
+--------------------------                                                      
+   HAHAHA                                                                       
+
+SQL> select lower('   hahaha    ') from dual;
+
+LOWER('HAHAHA')                                                                 
+--------------------------                                                      
+   hahaha                                                                       
+
+SQL> select lower('   HAHAHA    ') from dual;
+
+LOWER('HAHAHA')                                                                 
+--------------------------                                                      
+   hahaha                                                                       
+
+SQL> select initcap('   hahaha    ') from dual;
+
+INITCAP('HAHAHA')                                                               
+--------------------------                                                      
+   Hahaha                                                                       
+
+SQL> select translate('   hahaha    ','a','1') from dual;
+
+TRANSLATE('HAHAHA','A','1'                                                      
+--------------------------                                                      
+   h1h1h1                                                                       
+
+SQL> select translate('   hahaha    ','a') from dual;
+select translate('   hahaha    ','a') from dual
+       *
+第 1 行出现错误: 
+ORA-00909: 参数个数无效 
+
+
+SQL> select instr('   hahaha    ','a') from dual;
+
+INSTR('HAHAHA','A')                                                             
+-------------------                                                             
+                  5                                                             
+
+SQL> select replace('   hahaha    ','a','2') from dual;
+
+REPLACE('HAHAHA','A','2')                                                       
+--------------------------                                                      
+   h2h2h2                                                                       
+
+SQL> select replace('   hahaha    ','a') from dual;
+
+REPLACE('HAHAHA','A'                                                            
+--------------------                                                            
+   hhh                                                                          
+
+SQL> select stsdata from dual;
+select stsdata from dual
+       *
+第 1 行出现错误: 
+ORA-00904: "STSDATA": 标识符无效 
+
+
+SQL> select stsdate from dual;
+select stsdate from dual
+       *
+第 1 行出现错误: 
+ORA-00904: "STSDATE": 标识符无效 
+
+
+SQL> select sysdate from dual;
+
+SYSDATE                                                                         
+--------------                                                                  
+17-3月 -18                                                                      
+
+SQL> select months_between(sysdate,to_date('2109-01-01','yyyy-mm-dd')) from dual;
+
+MONTHS_BETWEEN(SYSDATE,TO_DATE('2109-01-01','YYYY-MM-DD'))                      
+----------------------------------------------------------                      
+                                                -1089.4689                      
+
+SQL> select add_months(sysdate,9) from dual;
+
+ADD_MONTHS(SYS                                                                  
+--------------                                                                  
+17-12月-18                                                                      
+
+SQL> select next_day(sysdate,1) from dual;
+
+NEXT_DAY(SYSDA                                                                  
+--------------                                                                  
+18-3月 -18                                                                      
+
+SQL> select next_day(sysdate,8) from dual;
+select next_day(sysdate,8) from dual
+                        *
+第 1 行出现错误: 
+ORA-01846: 周中的日无效 
+
+
+SQL> select next_day(sysdate,7) from dual;
+
+NEXT_DAY(SYSDA                                                                  
+--------------                                                                  
+24-3月 -18                                                                      
+
+SQL> 
+SQL> select last_day(sysdate) from dual;
+
+LAST_DAY(SYSDA                                                                  
+--------------                                                                  
+31-3月 -18                                                                      
+
+SQL> select to_char(sysdate,'yyyy-mm-dd hh:mi:ss') from dual;
+
+TO_CHAR(SYSDATE,'YYYY-MM-DDHH:MI:SS')                                           
+--------------------------------------                                          
+2018-03-17 11:18:02                                                             
+
+SQL> select to_date(sysdate,'yyyy-mm-dd') from dual;
+select to_date(sysdate,'yyyy-mm-dd') from dual
+               *
+第 1 行出现错误: 
+ORA-01861: 文字与格式字符串不匹配 
+
+
+SQL> select to_date('2108-03-17','yyyy-mm-dd') from dual;
+
+TO_DATE('2108-                                                                  
+--------------                                                                  
+17-3月 -08                                                                      
+
+SQL> select to_number('$132.12','$999.99') from dual;
+
+TO_NUMBER('$132.12','$999.99')                                                  
+------------------------------                                                  
+                        132.12                                                  
+
+SQL> select * from dept;
+
+    DEPTNO DNAME                        LOC                                     
+---------- ---------------------------- --------------------------              
+        10 ACCOUNTING                   NEW YORK                                
+        20 RESEARCH                     DALLAS                                  
+        30 SALES                        CHICAGO                                 
+        40 OPERATIONS                   BOSTON                                  
+
+SQL> insert into dept values(50,'开发部');
+insert into dept values(50,'开发部')
+            *
+第 1 行出现错误: 
+ORA-00947: 没有足够的值 
+
+
+SQL> insert into dept values(50,'开发部',null);
+
+已创建 1 行。
+
+SQL> select d.did,d.dname,nvl(d.tel,'暂无') from dept d;
+select d.did,d.dname,nvl(d.tel,'暂无') from dept d
+                         *
+第 1 行出现错误: 
+ORA-00904: "D"."TEL": 标识符无效 
+
+
+SQL> select d.did,d.dname,nvl(d.loc,'暂无') from dept d;
+select d.did,d.dname,nvl(d.loc,'暂无') from dept d
+       *
+第 1 行出现错误: 
+ORA-00904: "D"."DID": 标识符无效 
+
+
+SQL> select d.deptno,d.dname,nvl(d.loc,'暂无') from dept d;
+
+    DEPTNO DNAME                        NVL(D.LOC,'暂无')                       
+---------- ---------------------------- --------------------------              
+        10 ACCOUNTING                   NEW YORK                                
+        20 RESEARCH                     DALLAS                                  
+        30 SALES                        CHICAGO                                 
+        40 OPERATIONS                   BOSTON                                  
+        50 开发部                       暂无                                    
+
+SQL> spool off

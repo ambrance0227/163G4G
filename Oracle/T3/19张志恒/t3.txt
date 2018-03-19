@@ -1,0 +1,416 @@
+SQL> create table dept(
+  2         did integer primary key,
+  3         dname varchar2(20),
+  4         manager integer,
+  5         tel varchar2(15),
+  6         master integer
+  7  );
+
+表已创建。
+
+SQL> create table emp(
+  2         eid integer primary key,
+  3         ename varchar2(20),
+  4         sex varchar2(1),
+  5         hire date,
+  6         sar number(8,2),
+  7         did integer
+  8  );
+
+表已创建。
+
+SQL> create table history(
+  2         hid integer primary key,
+  3         startdate date,
+  4         enddate date,
+  5         place varchar2(50),
+  6         job varchar2(20),
+  7         eid integer
+  8  );
+
+表已创建。
+
+SQL> alter table emp modify sex varchar2(2);
+
+表已更改。
+
+SQL> insert int dept values (1,'董事会',5,'1111111',0);
+insert int dept values (1,'董事会',5,'1111111',0)
+       *
+第 1 行出现错误: 
+ORA-00925: 缺失 INTO 关键字 
+
+
+SQL> insert into dept values (1,'董事会',5,'1111111',0);
+
+已创建 1 行。
+
+SQL> insert into dept values (2,'市场部',5,'2222222',1);
+
+已创建 1 行。
+
+SQL> insert into emp values (5,'tom','m',sysdate-234,4500.50,1);
+
+已创建 1 行。
+
+SQL> insert into emp values (6,'lucy','f','12-5月-05',6500.00,2);
+
+已创建 1 行。
+
+SQL> 
+SQL> insert into emp values (6,'key','f',to_date('2008-09-19',yyyy-mm-dd),6500.00,2);
+insert into emp values (6,'key','f',to_date('2008-09-19',yyyy-mm-dd),6500.00,2)
+                                                                 *
+第 1 行出现错误: 
+ORA-00984: 列在此处不允许 
+
+
+SQL> insert into emp values (6,'key','f',to_date('2008-09-19',yyyy-mm-dd),7200.00,3);
+insert into emp values (6,'key','f',to_date('2008-09-19',yyyy-mm-dd),7200.00,3)
+                                                                 *
+第 1 行出现错误: 
+ORA-00984: 列在此处不允许 
+
+
+SQL> insert into emp values (7,'key','f',to_date('2008-09-19',yyyy-mm-dd),7200.00,3);
+insert into emp values (7,'key','f',to_date('2008-09-19',yyyy-mm-dd),7200.00,3)
+                                                                 *
+第 1 行出现错误: 
+ORA-00984: 列在此处不允许 
+
+
+SQL> insert into emp values (7,'key','f',to_date('2008-09-19','yyyy-mm-dd'),7200.00,3);
+
+已创建 1 行。
+
+SQL> create table emptwo as select ename,sex,hire from emp;
+
+表已创建。
+
+SQL> insert into emptwo(eid,ename) select eid,ename from emp;
+insert into emptwo(eid,ename) select eid,ename from emp
+                   *
+第 1 行出现错误: 
+ORA-00904: "EID": 标识符无效 
+
+
+SQL> insert into emptwo select * from emp;
+insert into emptwo select * from emp
+            *
+第 1 行出现错误: 
+ORA-00913: 值过多 
+
+
+SQL> update emp set sar = sar + 500;
+
+已更新3行。
+
+SQL> update emp set sar = sar + 500 where sar < 6000;
+
+已更新 1 行。
+
+SQL> update emp set hire = to_date('2012-03-01','yyyy-mm-dd') where ename='key';
+
+已更新 1 行。
+
+SQL> select * from emp order by sar asc;
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         5 tom                                      m    25-7月 -17             
+    5500.5          1                                                           
+                                                                                
+         6 lucy                                     f    12-5月 -05             
+      7000          2                                                           
+                                                                                
+         7 key                                      f    01-3月 -12             
+      7700          3                                                           
+                                                                                
+
+SQL> select *　from emp order by did asc,sar desc;
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         5 tom                                      m    25-7月 -17             
+    5500.5          1                                                           
+                                                                                
+         6 lucy                                     f    12-5月 -05             
+      7000          2                                                           
+                                                                                
+         7 key                                      f    01-3月 -12             
+      7700          3                                                           
+                                                                                
+
+SQL> select * from emp where sar between 3000 and 6000;
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         5 tom                                      m    25-7月 -17             
+    5500.5          1                                                           
+                                                                                
+
+SQL> select * from emp where sar not between 3000 and 6000;
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         6 lucy                                     f    12-5月 -05             
+      7000          2                                                           
+                                                                                
+         7 key                                      f    01-3月 -12             
+      7700          3                                                           
+                                                                                
+
+SQL> select * from emp where did in (2,3);
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         6 lucy                                     f    12-5月 -05             
+      7000          2                                                           
+                                                                                
+         7 key                                      f    01-3月 -12             
+      7700          3                                                           
+                                                                                
+
+SQL> select * from emp where ename like 't%'l;
+select * from emp where ename like 't%'l
+                                       *
+第 1 行出现错误: 
+ORA-00933: SQL 命令未正确结束 
+
+
+SQL> select * from emp where ename like 't%';
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         5 tom                                      m    25-7月 -17             
+    5500.5          1                                                           
+                                                                                
+
+SQL> select * from emp where sex = 'f' and sar > 5000;
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         6 lucy                                     f    12-5月 -05             
+      7000          2                                                           
+                                                                                
+         7 key                                      f    01-3月 -12             
+      7700          3                                                           
+                                                                                
+
+SQL> select * from avg(sar),max(sar),min(sar) from emp;
+select * from avg(sar),max(sar),min(sar) from emp
+                 *
+第 1 行出现错误: 
+ORA-00933: SQL 命令未正确结束 
+
+
+SQL> select avg(sar),max(sar),min(sar) from emp;
+
+  AVG(SAR)   MAX(SAR)   MIN(SAR)                                                
+---------- ---------- ----------                                                
+    6733.5       7700     5500.5                                                
+
+SQL> select count(eid),sum(sar) from emp;
+
+COUNT(EID)   SUM(SAR)                                                           
+---------- ----------                                                           
+         3    20200.5                                                           
+
+SQL> select distinct(did) from emp;
+
+       DID                                                                      
+----------                                                                      
+         1                                                                      
+         2                                                                      
+         3                                                                      
+
+SQL> select d.dname,max(e.sar),avg(e.sar)
+  2  from dept d,emp e
+  3  where d.did = e.did
+  4  group by d.dname;
+
+DNAME                                    MAX(E.SAR) AVG(E.SAR)                  
+---------------------------------------- ---------- ----------                  
+董事会                                       5500.5     5500.5                  
+市场部                                         7000       7000                  
+
+SQL> select d.dname,max(e.sar),min(e.sar),avg(e.sar)
+  2  from dept d,emp e
+  3  where d.did = e.did
+  4  group by d.dname
+  5  having avg(e.sar) < 5000;
+
+未选定行
+
+SQL> 
+SQL> select * from (select rownum r,e.* from emp e) where r>2 and r<3;
+
+未选定行
+
+SQL> 
+SQL> select * from emp where sar > 5000
+  2  union
+  3  select * from emp where did = 2;
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         5 tom                                      m    25-7月 -17             
+    5500.5          1                                                           
+                                                                                
+         6 lucy                                     f    12-5月 -05             
+      7000          2                                                           
+                                                                                
+         7 key                                      f    01-3月 -12             
+      7700          3                                                           
+                                                                                
+
+SQL> select * from emp
+  2  minus
+  3  select * from emptwo;
+select * from emp
+*
+第 1 行出现错误: 
+ORA-01789: 查询块具有不正确的结果列数 
+
+
+SQL> select ename || '的工资是：' || sar || '元' from emp;
+
+ENAME||'的工资是：'||SAR||'元'                                                  
+--------------------------------------------------------------------------------
+tom的工资是：5500.5元                                                           
+lucy的工资是：7000元                                                            
+key的工资是：7700元                                                             
+
+SQL> select * from em where eid not in (select manager from dept);
+select * from em where eid not in (select manager from dept)
+              *
+第 1 行出现错误: 
+ORA-00942: 表或视图不存在 
+
+
+SQL> select * from emp where eid not in (select manager from dept);
+
+       EID ENAME                                    SEX  HIRE                   
+---------- ---------------------------------------- ---- --------------         
+       SAR        DID                                                           
+---------- ----------                                                           
+         6 lucy                                     f    12-5月 -05             
+      7000          2                                                           
+                                                                                
+         7 key                                      f    01-3月 -12             
+      7700          3                                                           
+                                                                                
+
+SQL> select * from emp where eid in(
+  2  	select a.eid
+  3  	from(select eid,sar,did from emp) a,
+  4  		(select did,avg(sar) sar
+  5  		from emp
+  6  		group by did) b
+  7  	where a.did = b.did and a.sar>b.sar);
+
+未选定行
+
+SQL> select did,count(eid) cnt from emp group by did order by cnt desc,did asc;
+
+       DID        CNT                                                           
+---------- ----------                                                           
+         1          1                                                           
+         2          1                                                           
+         3          1                                                           
+
+SQL> select did fromselect did,count(eid) cnt from emp group by did order by cnt desc,did asc
+  2  
+SQL> ;
+  1* select did fromselect did,count(eid) cnt from emp group by did order by cnt desc,did asc
+SQL> select did from
+  2  (select did,count(eid) cnt from emp group by did order by cnt desc,did asc)
+  3  	where rownum = 1;
+
+       DID                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> select * from dept where did = (
+  2  select did from
+  3  (select did,count(eid) cnt from emp group by did order by cnt desc,did asc)
+  4  	where rownum = 1);
+
+       DID DNAME                                       MANAGER                  
+---------- ---------------------------------------- ----------                  
+TEL                                MASTER                                       
+------------------------------ ----------                                       
+         1 董事会                                            5                  
+1111111                                 0                                       
+                                                                                
+
+SQL> insert into dept values(99,'开发部',0,'55555',1);
+
+已创建 1 行。
+
+SQL> select d.did,d.dname,e.ename
+  2  from dept d
+  3  left join emp e on d.did = e.did;
+
+       DID DNAME                                                                
+---------- ----------------------------------------                             
+ENAME                                                                           
+----------------------------------------                                        
+         1 董事会                                                               
+tom                                                                             
+                                                                                
+         2 市场部                                                               
+lucy                                                                            
+                                                                                
+        99 开发部                                                               
+                                                                                
+                                                                                
+
+SQL> select d.did,d.dname,e.ename
+  2  from dept d
+  3  inner join emp e on d.did = e.did;
+
+       DID DNAME                                                                
+---------- ----------------------------------------                             
+ENAME                                                                           
+----------------------------------------                                        
+         1 董事会                                                               
+tom                                                                             
+                                                                                
+         2 市场部                                                               
+lucy                                                                            
+                                                                                
+
+SQL> select d.did,d.dname,d.tel,m.dname as 上级部门
+  2  from dept d,dept m
+  3  where d.master = m.did
+  4  ;
+
+       DID DNAME                                                                
+---------- ----------------------------------------                             
+TEL                            上级部门                                         
+------------------------------ ----------------------------------------         
+         2 市场部                                                               
+2222222                        董事会                                           
+                                                                                
+        99 开发部                                                               
+55555                          董事会                                           
+                                                                                
+
+SQL> spool off
